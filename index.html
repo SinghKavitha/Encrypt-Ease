@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 20px;
+        }
+
+        h1, h2 {
+            color: #004080;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 64, 128, 0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #004080;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #004080;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00214d;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-top: 5px;
+        }
+
+        hr {
+            border: 1px solid #ccc;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>WELCOME TO ENCRYPT EASE</h1>
+    <h1>Encryption Form</h1>
+
+    <form action="/encrypt" method="post">
+        <label for="user">User:</label>
+        <input type="text" name="user" required autocomplete="off">
+
+        <label for="message">Message:</label>
+        <input type="text" name="message" required autocomplete="off">
+
+        <button type="submit">Encrypt Message</button>
+    </form>
+
+    <hr>
+
+    <h2>Decryption Form</h2>
+
+    <form action="/decrypt" method="post">
+        <label for="user_decrypt">User:</label>
+        <input type="text" name="user_decrypt" required autocomplete="off">
+
+        <label for="message_decrypt">Encrypted Message:</label>
+        <input type="text" name="message_decrypt" required autocomplete="off">
+
+        <button type="submit">Decrypt Message</button>
+    </form>
+
+    <hr>
+
+    <h2>Encrypted Messages</h2>
+    <ul>
+        {% for person, messages in message_data.items() %}
+            <li>{{ person }}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message['message'] }} - {{ message['time'] }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if decrypted_message %}
+        <h2>Decrypted Message</h2>
+        <p>{{ decrypted_message }}</p>
+    {% endif %}
+</body>
+</html>
+
+
+
+
+
+
